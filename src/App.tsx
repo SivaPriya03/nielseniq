@@ -157,8 +157,10 @@ export default function App() {
                   ? products
                   : selectedProducts.map(
                       (id) =>
-                        products.find((product) => product.id === id) as Product
-                    )
+                        products.find(
+                          (product) => product.id === id,
+                        ) as Product,
+                    ),
               );
               setChartData({
                 showSpinner: false,
@@ -177,10 +179,11 @@ export default function App() {
       return <Spinner />;
     }
     const { type, data } = chartData;
-    if (type === "pie") return <CategoriesPieChart series={data} />;
+    if (type === "pie")
+      return <CategoriesPieChart series={data as PieChartSeries[]} />;
     return (
       <ProductBarChart
-        productsChart={data}
+        productsChart={data as BarChart}
         selectedCategory={selectedCategory}
       />
     );
